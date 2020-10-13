@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>⚡Blixtväder⚡</title>
+        <script>
+         var loaded=false;window.addEventListener("load",function(){loaded=true});function onInit(f){if(!loaded){window.addEventListener("load",f)}else{f()}}
+
+         $={id:new Proxy({},{get:function(target,id){return document.getElementById(id)}}),getById:function(txt){return document.getElementById(txt)},cls:function(txt){return Array.prototype.slice.call(document.getElementsByClassName(txt))},click:function(element,fun){element.addEventListener("click",fun)},change:function(element,fun){element.addEventListener("onchange",fun)},keyup:function(element,fun){element.addEventListener("keyup",fun)},focusout:function(element,fun){element.addEventListener("focusout",fun)},empty:function(element){while(element.firstChild){element.removeChild(element.lastChild)}},query:function(query){return Array.prototype.slice.call(document.querySelectorAll(query))},attr:function(ele,attr,val){if(typeof val==="undefined"){return ele.getAttribute(attr)}ele.setAttribute(attr,val)},txt:function(ele,txt,append){if(typeof append==="undefined"||!append){var childNodes=ele.childNodes;for(var i=0;i<childNodes.length;i++){if(childNodes[i].nodeType===3){ele.removeChild(childNodes[i])}}}ele.appendChild(document.createTextNode(txt))},nodeIndex:function(node){var index=0;while(node=node.previousSibling){if(node.nodeType!==3||!/^\s*$/.test(node.data)){index++}}return index},create:function(tag,attrs,text){if(typeof attrs==="undefined"){attrs={}}var element=document.createElement(tag);var keys=Object.keys(attrs);var i=0;while(i<keys.length){element.setAttribute(keys[i],attrs[keys[i]]);i++}if(!(typeof text==="undefined")){element.appendChild(document.createTextNode(text))}return element},tc:function(tag,attrs,children){node=$.create(tag,attrs);var i;for(i=0;i<children.length;i++){node.appendChild(children[i])}return node}};
+
+        </script>
+        
+
+
+        
+<title>⚡Blixtväder⚡</title>
+<style type="text/css">
+    body{margin:0;background-color:#64b5f6}h1{font-family:sans-serif}.page-container{width:100%;position:absolute;height:100%;display:flex;flex-direction:column}.text-stack{display:flex;flex-direction:column}.box{border-radius:16px;-webkit-box-shadow:4px 4px 11px -2px rgba(0,0,0,.53);-moz-box-shadow:4px 4px 11px -2px rgba(0,0,0,.53);box-shadow:4px 4px 11px -2px rgba(0,0,0,.53);background-color:#fff}.o-box{width:calc(100% - 128px);height:100%;margin:64px;display:flex;flex-direction:column;align-items:center;justify-content:center}.o-text{font-family:sans-serif;text-align:center}.o-reload-input{margin-top:16px;-webkit-box-shadow:1px 1px 5px 0px rgba(0,0,0,.43);-moz-box-shadow:1px 1px 5px 0px rgba(0,0,0,.43);box-shadow:1px 1px 5px 0px rgba(0,0,0,.43);background-color:#ffea00;border:none;padding:8px;border-radius:8px;font-family:sans-serif;font-weight:bold;outline:0}/*# sourceMappingURL=offline.min.css.map */
+
+</style>
+
+    </head>
+    <body>
+        
+<div class="page-container">
+    <div class="box o-box">
+        <h1>Inget internet?</h1>
+        <span class="o-text">⚡Blixtväder⚡ kan inte ansluta till internet...</span>
+        <input onclick="location.reload();return false;" class="o-reload-input" value="TESTA IGEN" type="button">
+    </div>
+
+</div>
+
+    </body>
+</html>

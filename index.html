@@ -4,6 +4,7 @@
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>⚡Blixtväder⚡</title>
         <script>
          var loaded=false;window.addEventListener("load",function(){loaded=true});function onInit(f){if(!loaded){window.addEventListener("load",f)}else{f()}}
 
@@ -14,19 +15,24 @@
 
 
         
-<title>⚡Blixtväder⚡</title>
+
 <link rel="preconnect" href="https://opendata-download-metfcst.smhi.se">
 <script src="static/js/weather.js" async></script>
-<script src="static/js/geonames.js" async></script>
+<script src="static/js/search.js" async></script>
 <style type="text/css">
-    body{margin:0;background-color:#64b5f6}.page-container{width:100%;position:absolute;height:100%;display:flex;flex-direction:column}.s-bar-icon{width:24px}.w-container{display:flex;justify-content:center;flex-direction:column;align-items:center;margin-top:76px}.w-box{background-color:#fff;padding:8px;margin:16px 8px 12px 8px;width:calc(100% - 8px * 2 - 8px * 2)}.w-box:not(:first-child){margin-top:0}.s-bar-container{width:100%;height:76px;display:flex;justify-content:center;position:fixed}.s-bar-container .s-bar{display:flex;background-color:#ffea00;align-items:center;justify-content:center;flex-direction:column;width:100%;margin:0;border-radius:0}.s-bar-container .s-bar .s-input-bar{width:100%;display:flex;align-items:center;justify-content:center}@media screen and (min-width: 1100px){.w-container{margin-top:0;flex-direction:row;align-items:stretch;height:calc(100% - 76px)}.w-container .w-box{width:425px;padding-left:64px;padding-right:64px;margin:25px 0 25px 0}.w-container .w-box.w-hours{margin-left:32px}.w-hours{margin-left:32px}.s-bar-container{position:static}.s-bar-container .s-bar{margin-top:16px;border-radius:16px;width:calc(425px * 2 + 32px + 256px)}}/*# sourceMappingURL=style.min.css.map */
+    body{margin:0;background-color:#64b5f6}h1{font-family:sans-serif}.page-container{width:100%;position:absolute;height:100%;display:flex;flex-direction:column}.text-stack{display:flex;flex-direction:column}.s-bar-icon{width:24px}.w-container{display:flex;justify-content:center;flex-direction:column;align-items:center;margin-top:80px}.w-box{background-color:#fff;padding:8px;margin:16px 8px 12px 8px;width:calc(100% - 8px * 2 - 8px * 2)}.w-box:not(:first-child){margin-top:0}.s-bar-container{width:100%;height:80px;display:flex;justify-content:center;position:fixed}.s-bar-container .s-bar{display:flex;background-color:#ffea00;align-items:center;justify-content:flex-end;flex-direction:column;width:100%;margin:0;border-radius:0}.s-bar-container .s-bar .s-input-bar{width:100%;display:flex;align-items:center;justify-content:center}.s-loading-bar-container{height:4px}@media screen and (min-width: 900px){.w-container{margin-top:0;flex-direction:row;align-items:stretch;height:calc(100% - 80px)}.w-container .w-box{width:425px;padding-left:64px;padding-right:64px;margin:25px 0 25px 8px}.w-container .w-box.w-hours{margin-left:32px}.w-container .w-box:not(:first-child){margin:25px 8px 25px 32px}.s-bar-container{position:static}.s-bar-container .s-bar{margin:16px 8px 0 8px;width:1138px}}@media screen and (max-width: 1050px)and (min-width: 900px){.w-container{justify-content:space-around}.w-container .w-box{padding-left:16px;padding-right:16px}}/*# sourceMappingURL=style.min.css.map */
 
 </style>
 <link rel="preload" href="static/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="static/style/style.css"></noscript>
 <script>
-    var initWeatherLoaded=false;var initWeatherForecast=undefined;var geonames=undefined;var lat;var lon;var currentLocation="";function loadDefault(){fetch("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/"+lon+"/lat/"+lat+"/data.json").then(function(x){return x.json()}).then(function(x){if(initWeatherLoaded){initWeatherLoad(x)}initWeatherForecast=x})}function loadGeonames(){fetch("res/geonames.json").then(function(x){return x.json()}).then(function(x){geonames=x;if(initWeatherLoaded){loadFavorites();updateSearchUi()}})}function initWeatherLoad(forecast){loadForcast(processForcast(forecast))}function init(){var value=localStorage.getItem("defaultName");if(!value){lat="59.32938";lon="18.06871";currentLocation="Stockholm"}else{currentLocation=localStorage.getItem("defaultName");lat=localStorage.getItem("defaultLat");lon=localStorage.getItem("defaultLon")}loadDefault();loadGeonames()}init();window.addEventListener("load",function(){initWeatherLoaded=true;if(initWeatherForecast!==undefined){initWeatherLoad(initWeatherForecast)}if(geonames!==undefined){loadFavorites();updateSearchUi()}});
+    var initWeatherLoaded=false;var initWeatherForecast=undefined;var geonames=undefined;var lat;var lon;var currentLocation="";function loadDefault(){fetch("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/"+lon+"/lat/"+lat+"/data.json").then(function(x){return x.json()}).then(function(x){if(initWeatherLoaded){initWeatherLoad(x)}initWeatherForecast=x})}function loadGeonames(){fetch("res/geonames.json").then(function(x){return x.json()}).then(function(x){geonames=x;if(initWeatherLoaded){loadFavorites();updateSearchUi()}})}function initWeatherLoad(forecast){loadForcast(processForcast(forecast));setLoadingBar(false)}function init(){var value=localStorage.getItem("defaultName");if(!value){lat="59.32938";lon="18.06871";currentLocation="Stockholm"}else{currentLocation=localStorage.getItem("defaultName");lat=localStorage.getItem("defaultLat");lon=localStorage.getItem("defaultLon")}loadDefault();loadGeonames()}init();window.addEventListener("load",function(){initWeatherLoaded=true;if(initWeatherForecast!==undefined){initWeatherLoad(initWeatherForecast)}if(geonames!==undefined){loadFavorites();updateSearchUi()}});
 
+    window.addEventListener("load", () => {
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js");
+        }
+    });
 </script>
 
     </head>
@@ -39,8 +45,8 @@
                 <img class="s-bar-icon" id="searchFavIcon" src="res/fav.svg" alt="favorite">
                 <div class="s-input-container">
                     <input spellcheck="false" class="s-input"
-                                                                  id="locationSearchBar" placeholder="Sök ort..."
-                                                                  value="" aria-label="Sök plats">
+                           id="locationSearchBar" placeholder="Sök ort..."
+                           value="" aria-label="Sök plats">
                 </div>
                 <img class="s-bar-icon" id="searchHeartIcon" src="res/heart.svg" alt="heart">
             </div>
@@ -51,14 +57,23 @@
                     <span class="s-result-text" id="searchResultText"></span>
                 </div>
             </div>
+            <div class="s-loading-bar-container">
+                <div id="loadingBar" class="s-loading-bar active">
+                    <div class="s-loading-bar-marker"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="w-container">
-        <div class="w-box">
+        <div class="w-box box">
             <div class="w-box-content">
-                <img id="fcWsymbImg" alt="wsymb" class="w-wsymb">
-                <span class="w-text w-box-text center" id="fcWsymb">--</span>
-                <span class="w-text w-temp w-box-temp center" id="fcTemp">--</span>
+                <div class="w-wsymb-temp-text-container">
+                    <img id="fcWsymbImg" alt="wsymb" class="w-wsymb">
+                    <div class="w-temp-text-container">
+                        <span class="w-text w-temp w-box-temp center" id="fcTemp">--</span>
+                        <span class="w-text w-box-text center" id="fcWsymb">--</span>
+                    </div>
+                </div>
                 <div class="w-row">
                     <span class="w-text w-box-text" id="fcWindD"></span>
                     <span class="w-text w-box-text w-speed" id="fcWindS"></span>
@@ -67,7 +82,7 @@
                 <span class="w-text w-box-text w-pre-amount center" id="fcPreMean"></span>
                 <div class="w-10days" id="fcDays">
                     
-                    <div class="w-day-row" id="fcDay0" onclick="openDay(0)">
+                    <div class="w-day-row" id="fcDay0" onclick="openDay(0); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -80,7 +95,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay1" onclick="openDay(1)">
+                    <div class="w-day-row" id="fcDay1" onclick="openDay(1); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -93,7 +108,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay2" onclick="openDay(2)">
+                    <div class="w-day-row" id="fcDay2" onclick="openDay(2); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -106,7 +121,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay3" onclick="openDay(3)">
+                    <div class="w-day-row" id="fcDay3" onclick="openDay(3); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -119,7 +134,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay4" onclick="openDay(4)">
+                    <div class="w-day-row" id="fcDay4" onclick="openDay(4); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -132,7 +147,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay5" onclick="openDay(5)">
+                    <div class="w-day-row" id="fcDay5" onclick="openDay(5); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -145,7 +160,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay6" onclick="openDay(6)">
+                    <div class="w-day-row" id="fcDay6" onclick="openDay(6); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -158,7 +173,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay7" onclick="openDay(7)">
+                    <div class="w-day-row" id="fcDay7" onclick="openDay(7); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -171,7 +186,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay8" onclick="openDay(8)">
+                    <div class="w-day-row" id="fcDay8" onclick="openDay(8); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -184,7 +199,7 @@
                     <div class="w-separator"></div>
                     
                     
-                    <div class="w-day-row" id="fcDay9" onclick="openDay(9)">
+                    <div class="w-day-row" id="fcDay9" onclick="openDay(9); scrollToDay()">
                         <span class="w-day-date">--</span>
                         <div class="text-stack w-day-temp">
                             <span class="w-day-temp-max w-temp">--</span>
@@ -197,259 +212,264 @@
                     
                 </div>
             </div>
+
         </div>
-        <div class="w-box w-hours" id="fcHours">
+        <div class="w-box w-hours box" id="fcHours">
             <div class="w-box-content">
                 <div class="w-hour header" id="fcHourHeader">
                     <div class="w-hour-row">
-                        <span class="w-hour-time">Tid</span>
-                        <span class="w-hour-temp">Temperatur</span>
-                        <span class="w-hour-pre">Nederbörd</span>
-                        <span class="w-hour-winds">Vind</span>
-                        <span class="w-hour-windd">Riktning</span>
+                        
+
+                        <img class="w-hour-time w-hour-icon" src="res/time.svg" alt="Tid">
+                        <img class="w-hour-temp w-hour-icon" src="res/temp.svg" alt="Temperatur">
+                        <img class="w-hour-pre w-hour-icon" src="res/rain.svg" alt="Nederbörd">
+                        <img class="w-hour-winds w-hour-icon" src="res/wind.svg" alt="Vind">
+                        <img class="w-hour-windd w-hour-icon" src="res/dir.svg" alt="Vindriktning">
                     </div>
                 </div>
-                
-                <div class="w-hour" id="fcHour0">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                <div class="w-hour-container">
+                    
+                    <div class="w-hour" id="fcHour0">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour1">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour1">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour2">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour2">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour3">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour3">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour4">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour4">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour5">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour5">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour6">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour6">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour7">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour7">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour8">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour8">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour9">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour9">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour10">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour10">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour11">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour11">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour12">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour12">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour13">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour13">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour14">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour14">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour15">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour15">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour16">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour16">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour17">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour17">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour18">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour18">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour19">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour19">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour20">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour20">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour21">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour21">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour22">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour22">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="w-hour" id="fcHour23">
-                    <div class="w-hour-row">
-                        <span class="w-hour-time">--</span>
-                        <span class="w-hour-temp w-temp">--</span>
-                        <span class="w-hour-pre w-pre-amount-total">--</span>
-                        <span class="w-hour-winds w-speed">--</span>
-                        <span class="w-hour-windd">--</span>
+                    
+                    <div class="w-hour" id="fcHour23">
+                        <div class="w-hour-row">
+                            <span class="w-hour-time">--</span>
+                            <span class="w-hour-temp w-temp">--</span>
+                            <span class="w-hour-pre w-pre-amount-total">--</span>
+                            <span class="w-hour-winds w-speed">--</span>
+                            <span class="w-hour-windd">--</span>
+                        </div>
                     </div>
+                    
                 </div>
-                
             </div>
         </div>
     </div>
